@@ -175,35 +175,33 @@ if (isset($_POST['submit_parent'])) {
       <th scope="col">Tel</th>
       <th scope="col">District</th>
       <th col-span="2">Action</th>
+      <th col-span="2"></th>
     </tr>
   </thead>
   <tbody>
-    <?php
-// display
+  <?php
+  // display
+  $select = "SELECT * FROM parents";
+  $display = mysqli_query($conn, $select);
 
-    $select = "SELECT * FROM parents";
-    $display = mysqli_query($conn, $select);
-
-    if(mysqli_num_rows($display) > 0){
-      while($row = mysqli_fetch_assoc($display)){
-        echo "<tr><th scope='row'>{$row['ParentNationalId']}</th>";
-        $parentid = $row['ParentNationalId'];
-        echo "<td>{$row['pFirstName']}</td>";
-        echo "<td>{$row['pLastName']}</td>";
-        echo "<td>{$row['pGender']}</td>";
-        echo "<td>{$row['PhoneNumber']}</td>";
-        echo "<td>{$row['District']}</td>";
-        echo "<td><a href='admin.php?pid=$parentid'>update</a></td>";
-        echo "<td><a href='admin.php?pid=$parentid'>delete</a></td>";
-        echo "</tr>";
+  if (mysqli_num_rows($display) > 0) {
+      while ($row = mysqli_fetch_assoc($display)) {
+          echo "<tr><th scope='row'>{$row['ParentNationalId']}</th>";
+          $parentid = $row['ParentNationalId'];
+          echo "<td>{$row['pFirstName']}</td>";
+          echo "<td>{$row['pLastName']}</td>";
+          echo "<td>{$row['pGender']}</td>";
+          echo "<td>{$row['PhoneNumber']}</td>";
+          echo "<td>{$row['District']}</td>";
+          echo "<td><a href='admin-update.php?pid=$parentid'>update</a></td>";
+          echo "<td><a href='admin.php?pid=$parentid'>delete</a></td>";
+          echo "</tr>";
       }
-
-
-
-    }
-    ?>
-  </tbody>
+  }
+  ?>
+</tbody>
 </table>
+
 </section>
 
 
